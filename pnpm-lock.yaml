@@ -33,9 +33,9 @@ importers:
 
   apps/react:
     dependencies:
-      '@jilles/database':
+      '@jilles/schema':
         specifier: workspace:*
-        version: link:../../packages/database
+        version: link:../../packages/schema
       react:
         specifier: ^19.1.1
         version: 19.1.1

@@ -11,7 +11,7 @@
     }
   },
   "scripts": {
-    "build": "tsc",
+    "build": "echo \"Building @jilles/database...\" && tsc",
     "dev": "tsc --watch"
   },
   "dependencies": {
