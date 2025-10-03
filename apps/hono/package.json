@@ -2,13 +2,14 @@
   "name": "hono",
   "type": "module",
   "scripts": {
-    "dev": "tsx watch src/index.ts",
-    "build": "tsc",
-    "start": "node dist/index.js"
+    "dev": "echo \"[hono] Starting API server on port 3000...\" && tsx watch src/index.ts",
+    "build": "echo \"[hono] Building API server...\" && tsc",
+    "start": "echo \"[hono] Running production server...\" && node dist/index.js"
   },
   "dependencies": {
     "@hono/node-server": "^1.19.5",
     "hono": "^4.9.9",
+    "@jilles/schema": "workspace:*",
     "@jilles/database": "workspace:*"
   },
   "devDependencies": {

@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "echo \"Building react app...\" && tsc -b && vite build",
+    "dev": "echo \"[react] Starting dev server...\" && vite",
+    "build": "echo \"[react] Building application...\" && tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },

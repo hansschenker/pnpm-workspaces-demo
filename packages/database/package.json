@@ -11,8 +11,8 @@
     }
   },
   "scripts": {
-    "build": "echo \"Building @jilles/database...\" && tsc",
-    "dev": "tsc --watch"
+    "build": "echo \"[database] Building package...\" && tsc",
+    "dev": "echo \"[database] Starting watch mode...\" && tsc --watch"
   },
   "dependencies": {
     "@jilles/schema": "workspace:*"

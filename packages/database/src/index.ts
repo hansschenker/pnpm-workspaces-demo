@@ -20,3 +20,8 @@ export function reset(): Counter {
   counter.value = 0;
   return counter;
 }
+
+export function set(value: number): Counter {
+  counter.value = value;
+  return counter;
+}

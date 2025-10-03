@@ -20,6 +20,9 @@ importers:
       '@jilles/database':
         specifier: workspace:*
         version: link:../../packages/database
+      '@jilles/schema':
+        specifier: workspace:*
+        version: link:../../packages/schema
       hono:
         specifier: ^4.9.9
         version: 4.9.9

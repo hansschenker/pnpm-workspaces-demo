@@ -11,8 +11,8 @@
     }
   },
   "scripts": {
-    "build": "echo \"Building @jilles/schema...\" && tsc",
-    "dev": "tsc --watch"
+    "build": "echo \"[schema] Building package...\" && tsc",
+    "dev": "echo \"[schema] Starting watch mode...\" && tsc --watch"
   },
   "dependencies": {
     "zod": "^4.1.11"
