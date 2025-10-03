@@ -4,13 +4,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "pnpm --parallel run dev",
-    "dev:apps": "pnpm --filter \"./apps/*\" --parallel run dev",
-    "dev:packages": "pnpm --filter \"./packages/*\" --parallel run dev",
-    "build": "pnpm -r run build",
-    "type-check": "pnpm -r exec tsc --noEmit",
-    "clean": "pnpm -r exec rm -rf dist node_modules"
+    "build": "pnpm -r run build"
   },
   "keywords": [],
   "author": "",
