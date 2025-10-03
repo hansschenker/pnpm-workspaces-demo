@@ -2,5 +2,3 @@ packages:
   - 'apps/*'
   - 'packages/*'
 
-catalog:
-  zod: ^4.0.0
