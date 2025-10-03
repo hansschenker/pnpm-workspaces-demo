@@ -15,6 +15,6 @@
     "dev": "tsc --watch"
   },
   "dependencies": {
-    "zod": "catalog:"
+    "zod": "^4.1.11"
   }
 }

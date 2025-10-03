@@ -1,49 +1,61 @@
-import { useState } from 'react'
-
+import { useState, useEffect } from 'react'
+import type { Counter } from '@jilles/schema'
 import './App.css'
 
-const API_URL = 'http://localhost:8787';
+
+const API_URL = 'http://localhost:3000';
 
 function App() {
-  const [todos, setTodos] = useState<any[]>([]);
-  const [newTodo, setNewTodo] = useState('');
+  const [counter, setCounter] = useState<Counter>({ value: 0 });
 
-  const handleCreate = async () => {
-    if (newTodo.trim()) {
-      await fetch(`${API_URL}/todos`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title: newTodo, completed: false })
-      });
-      setNewTodo('');
-      handleGetAll();
-    }
+  const fetchCounter = async () => {
+    const response = await fetch(`${API_URL}/counter`);
+    const data = await response.json();
+    setCounter(data);
   };
 
-  const handleGetAll = async () => {
-    const response = await fetch(`${API_URL}/todos`);
-    const allTodos = await response.json();
-    setTodos(allTodos);
+  useEffect(() => {
+    fetchCounter();
+  }, []);
+
+  const handleIncrement = async () => {
+    const response = await fetch(`${API_URL}/counter/increment`, {
+      method: 'POST'
+    });
+    const data = await response.json();
+    setCounter(data);
+  };
+
+  const handleDecrement = async () => {
+    const response = await fetch(`${API_URL}/counter/decrement`, {
+      method: 'POST'
+    });
+    const data = await response.json();
+    setCounter(data);
+  };
+
+  const handleReset = async () => {
+    const response = await fetch(`${API_URL}/counter/reset`, {
+      method: 'POST'
+    });
+    const data = await response.json();
+    setCounter(data);
   };
 
   return (
-    <div>
-      <input
-        type="text"
-        value={newTodo}
-        onChange={(e) => setNewTodo(e.target.value)}
-        placeholder="Enter todo"
-      />
-      <button onClick={handleCreate}>Create</button>
-
-      <div>
-        <h2>Todos</h2>
-        <button onClick={handleGetAll}>Get All Todos</button>
-        <ul>
-          {todos.map((todo, index) => (
-            <li key={index}>{JSON.stringify(todo)}</li>
-          ))}
-        </ul>
+    <div style={{ textAlign: 'center', marginTop: '50px' }}>
+      <h1>Counter Demo</h1>
+      <h2 style={{ fontSize: '3rem', margin: '20px' }}>{counter.value}</h2>
+      <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
+        <button onClick={handleIncrement} style={{ fontSize: '1.5rem', padding: '10px 20px' }}>
+          +1
+        </button>
+        <button onClick={handleDecrement} style={{ fontSize: '1.5rem', padding: '10px 20px' }}>
+          -1
+        </button>
+        <button onClick={handleReset} style={{ fontSize: '1.5rem', padding: '10px 20px' }}>
+          Reset
+        </button>
       </div>
     </div>
   )

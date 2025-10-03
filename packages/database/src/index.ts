@@ -1,23 +1,22 @@
-import { CreateTaskSchema, type Task, CreateTask } from '@jilles/schema';
+import type { Counter } from '@jilles/schema';
 
-const tasks: Record<string, Task> = {};
+const counter: Counter = { value: 0 };
 
-export function create(task: CreateTask): Task {
-  const data = CreateTaskSchema.safeParse(task);
-
-  if (!data.success) {
-    throw new Error('Invalid task data');
-  }
-
-  const id = crypto.randomUUID();
-  tasks[id] = {
-    ...task,
-    id,
-    createdAt: new Date().toISOString()
-  };
-  return tasks[id];
+export function get(): Counter {
+  return counter;
 }
 
-export function getAll(): Task[] {
-  return Object.values(tasks);
+export function increment(): Counter {
+  counter.value++;
+  return counter;
+}
+
+export function decrement(): Counter {
+  counter.value--;
+  return counter;
+}
+
+export function reset(): Counter {
+  counter.value = 0;
+  return counter;
 }

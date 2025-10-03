@@ -1,24 +1,31 @@
-import { Hono } from "hono";
-import { cors } from "hono/cors";
-import { create, getAll } from "@jilles/database";
+import { serve } from '@hono/node-server'
+import { Hono } from 'hono'
+import { cors } from 'hono/cors'
+import * as db from '@jilles/database'
 
-const app = new Hono<{ Bindings: CloudflareBindings }>();
+const app = new Hono()
 
-app.use("/*", cors());
+app.use('/*', cors())
 
-app.get("/message", (c) => {
-  return c.text("Hello Hono!");
-});
+app.get('/counter', (c) => {
+  return c.json(db.get())
+})
 
-app.get("/todos", (c) => {
-  const todos = getAll();
-  return c.json(todos);
-});
+app.post('/counter/increment', (c) => {
+  return c.json(db.increment())
+})
 
-app.post("/todos", async (c) => {
-  const body = await c.req.json();
-  const todo = create(body);
-  return c.json(todo);
-});
+app.post('/counter/decrement', (c) => {
+  return c.json(db.decrement())
+})
 
-export default app;
+app.post('/counter/reset', (c) => {
+  return c.json(db.reset())
+})
+
+serve({
+  fetch: app.fetch,
+  port: 3000
+}, (info) => {
+  console.log(`Server is running on http://localhost:${info.port}`)
+})
