@@ -1,20 +1,18 @@
 {
-  "name": "hono",
-  "type": "module",
-  "scripts": {
-    "dev": "echo \"[hono] Starting API server on port 3000...\" && tsx watch src/index.ts",
-    "build": "echo \"[hono] Building API server...\" && tsc",
-    "start": "echo \"[hono] Running production server...\" && node dist/index.js"
-  },
-  "dependencies": {
-    "@hono/node-server": "^1.19.5",
-    "hono": "^4.9.9",
-    "@jilles/schema": "workspace:*",
-    "@jilles/database": "workspace:*"
-  },
-  "devDependencies": {
-    "@types/node": "^20.11.17",
-    "tsx": "^4.7.1",
-    "typescript": "^5.8.3"
-  }
+    "name": "hono",
+    "type": "module",
+    "scripts": {
+        "dev": "echo \"[hono] Starting API server on port 3000...\" && tsx watch src/index.ts",
+        "build": "echo \"[hono] Building API server...\" && tsc",
+        "start": "echo \"[hono] Running production server...\" && node dist/index.js"
+    },
+    "dependencies": {
+        "@hono/node-server": "^1.19.5",
+        "hono": "^4.9.9"
+    },
+    "devDependencies": {
+        "@types/node": "^20.11.17",
+        "tsx": "^4.7.1",
+        "typescript": "^5.8.3"
+    }
 }
