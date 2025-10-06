@@ -14,5 +14,7 @@
         "build": "echo \"[database] Building package...\" && tsc",
         "dev": "echo \"[database] Starting watch mode...\" && tsc --watch"
     },
-    "dependencies": {}
+    "dependencies": {
+        "@jilles/schema": "workspace:*"
+    }
 }
