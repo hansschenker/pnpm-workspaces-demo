@@ -1,6 +1,7 @@
 {
-  "name": "@jilles/jsx",
+  "name": "@netxpert/jsx",
   "version": "1.0.0",
+  "private": true,
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -19,7 +20,7 @@
     }
   },
   "scripts": {
-    "build": "echo \"[jsx] Building package...\" && tsc",
-    "dev": "echo \"[jsx] Starting watch mode...\" && tsc --watch"
+    "build": "tsc -b",
+    "dev": "tsc -b --watch"
   }
 }

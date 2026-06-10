@@ -4,7 +4,8 @@
     { "path": "./packages/schema" },
     { "path": "./packages/database" },
     { "path": "./packages/jsx" },
-    { "path": "./apps/hono" },
-    { "path": "./apps/web" }
+    { "path": "./packages/api" },
+    { "path": "./apps/server" },
+    { "path": "./apps/client" }
   ]
 }

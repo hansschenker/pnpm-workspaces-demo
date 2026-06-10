@@ -4,58 +4,97 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+catalogs:
+  default:
+    '@hono/node-server':
+      specifier: ^1.19.5
+      version: 1.19.5
+    '@types/node':
+      specifier: ^20.11.17
+      version: 20.19.19
+    hono:
+      specifier: ^4.9.9
+      version: 4.9.9
+    tsx:
+      specifier: ^4.7.1
+      version: 4.20.6
+    typescript:
+      specifier: ^5.9.2
+      version: 5.9.2
+    vite:
+      specifier: ^7.1.7
+      version: 7.1.7
+    zod:
+      specifier: ^4.1.11
+      version: 4.1.11
+
 importers:
 
   .:
     devDependencies:
       typescript:
-        specifier: ^5.9.2
+        specifier: 'catalog:'
         version: 5.9.2
 
-  apps/hono:
+  apps/client:
     dependencies:
-      '@hono/node-server':
-        specifier: ^1.19.5
-        version: 1.19.5(hono@4.9.9)
-      '@jilles/database':
+      '@netxpert/api':
         specifier: workspace:*
-        version: link:../../packages/database
-      '@jilles/schema':
+        version: link:../../packages/api
+      '@netxpert/jsx':
+        specifier: workspace:*
+        version: link:../../packages/jsx
+      '@netxpert/schema':
         specifier: workspace:*
         version: link:../../packages/schema
       hono:
-        specifier: ^4.9.9
+        specifier: 'catalog:'
+        version: 4.9.9
+    devDependencies:
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
+      vite:
+        specifier: 'catalog:'
+        version: 7.1.7(@types/node@20.19.19)(tsx@4.20.6)
+
+  apps/server:
+    dependencies:
+      '@hono/node-server':
+        specifier: 'catalog:'
+        version: 1.19.5(hono@4.9.9)
+      '@netxpert/api':
+        specifier: workspace:*
+        version: link:../../packages/api
+      hono:
+        specifier: 'catalog:'
         version: 4.9.9
     devDependencies:
       '@types/node':
-        specifier: ^20.11.17
+        specifier: 'catalog:'
         version: 20.19.19
       tsx:
-        specifier: ^4.7.1
+        specifier: 'catalog:'
         version: 4.20.6
       typescript:
-        specifier: ^5.8.3
+        specifier: 'catalog:'
         version: 5.9.2
 
-  apps/web:
+  packages/api:
     dependencies:
-      '@jilles/jsx':
+      '@netxpert/database':
         specifier: workspace:*
-        version: link:../../packages/jsx
-      '@jilles/schema':
+        version: link:../database
+      '@netxpert/schema':
         specifier: workspace:*
-        version: link:../../packages/schema
-    devDependencies:
-      typescript:
-        specifier: ~5.8.3
-        version: 5.8.3
-      vite:
-        specifier: ^7.1.7
-        version: 7.1.7(@types/node@20.19.19)(tsx@4.20.6)
+        version: link:../schema
+      hono:
+        specifier: 'catalog:'
+        version: 4.9.9
 
   packages/database:
     dependencies:
-      '@jilles/schema':
+      '@netxpert/schema':
         specifier: workspace:*
         version: link:../schema
 
@@ -64,7 +103,7 @@ importers:
   packages/schema:
     dependencies:
       zod:
-        specifier: ^4.1.11
+        specifier: 'catalog:'
         version: 4.1.11
 
 packages:
@@ -410,11 +449,6 @@ packages:
     engines: {node: '>=18.0.0'}
     hasBin: true
 
-  typescript@5.8.3:
-    resolution: {integrity: sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ==}
-    engines: {node: '>=14.17'}
-    hasBin: true
-
   typescript@5.9.2:
     resolution: {integrity: sha512-CWBzXQrc/qOkhidw1OzBTQuYRbfyxDXJMVJ1XNwUHGROVmuaeiEm3OslpZ1RV96d7SKKjZKrSJu3+t/xlw3R9A==}
     engines: {node: '>=14.17'}
@@ -719,8 +753,6 @@ snapshots:
       get-tsconfig: 4.10.1
     optionalDependencies:
       fsevents: 2.3.3
-
-  typescript@5.8.3: {}
 
   typescript@5.9.2: {}
 

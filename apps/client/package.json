@@ -1,0 +1,21 @@
+{
+    "name": "@netxpert/client",
+    "version": "1.0.0",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "tsc -b && vite build",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "@netxpert/api": "workspace:*",
+        "@netxpert/jsx": "workspace:*",
+        "@netxpert/schema": "workspace:*",
+        "hono": "catalog:"
+    },
+    "devDependencies": {
+        "typescript": "catalog:",
+        "vite": "catalog:"
+    }
+}

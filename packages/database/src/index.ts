@@ -1,4 +1,4 @@
-import type { Counter } from '@jilles/schema';
+import type { Counter } from '@netxpert/schema';
 
 const counter: Counter = { value: 0 };
 

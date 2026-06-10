@@ -2,6 +2,14 @@ packages:
   - 'apps/*'
   - 'packages/*'
 
+catalog:
+  '@hono/node-server': ^1.19.5
+  '@types/node': ^20.11.17
+  hono: ^4.9.9
+  tsx: ^4.7.1
+  typescript: ^5.9.2
+  vite: ^7.1.7
+  zod: ^4.1.11
 
 onlyBuiltDependencies:
   - esbuild

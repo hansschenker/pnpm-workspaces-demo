@@ -1,5 +1,5 @@
 {
-  "name": "@netxpert/database",
+  "name": "@netxpert/api",
   "version": "1.0.0",
   "private": true,
   "type": "module",
@@ -16,6 +16,8 @@
     "dev": "tsc -b --watch"
   },
   "dependencies": {
-    "@netxpert/schema": "workspace:*"
+    "@netxpert/database": "workspace:*",
+    "@netxpert/schema": "workspace:*",
+    "hono": "catalog:"
   }
 }
