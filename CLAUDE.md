@@ -21,6 +21,8 @@ pnpm --filter @netxpert/worker run deploy  # deploy the API to Workers ("run" is
 pnpm --filter @netxpert/client run deploy  # deploy the client to Pages (project netxpert-client)
 ```
 
+**Deployment policy: deploys are manual via wrangler only.** Pushing to GitHub deploys nothing, by design — do not set up Pages Git integration or GitHub Actions deploy workflows. If CI is ever added, limit it to build/test.
+
 There are no tests or linting in this repo.
 
 ## Architecture
