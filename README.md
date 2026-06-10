@@ -1,6 +1,22 @@
-# netxpert-fullstack
+# cloudflare-fullstack-template
 
-A reference fullstack TypeScript monorepo managed with **pnpm workspaces** — no UI framework, no ORM, no magic. A small counter app demonstrates how the pieces connect.
+A reference fullstack TypeScript monorepo for Cloudflare projects, managed with **pnpm workspaces** — no UI framework, no ORM, no magic. A small counter app demonstrates how the pieces connect; replace it with your domain.
+
+Built collaboratively with [Claude Code](https://claude.com/claude-code) — see the commit history for the co-authored evolution from single demo to this architecture.
+
+## Using this template
+
+Click **Use this template** on GitHub, then do the rename pass — these values are account-global on Cloudflare, so every project needs its own:
+
+1. `apps/worker/wrangler.jsonc` — change the worker `name` and set `compatibility_date` to today
+2. `apps/client/package.json` — change the Pages `--project-name` in the deploy script
+3. `apps/client/.env.production` — point `VITE_API_URL` at your worker URL
+4. `apps/worker/src/index.ts` — update the allowed CORS origins to your Pages domain
+5. README — replace the live-demo URLs with yours
+
+Optional: rename the `@netxpert` scope. Not required — all packages are `private: true` and never published to npm, so the scope only exists inside your workspace.
+
+Then: `pnpm install && pnpm dev`, and when ready to ship, `wrangler login` and the deploy commands below.
 
 ## Layout
 
