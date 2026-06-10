@@ -5,9 +5,10 @@ import type { AppType } from '@netxpert/api';
 import type { Counter } from '@netxpert/schema';
 
 // Typed RPC client: routes, methods and response shapes are checked
-// against the api package at compile time. Requests go to the Vite
-// dev server, which proxies /counter to the API (see vite.config.ts).
-const client = hc<AppType>(window.location.origin);
+// against the api package at compile time. In dev, requests go to the
+// Vite dev server, which proxies /counter to the API (vite.config.ts);
+// production builds bake in the deployed API URL (.env.production).
+const client = hc<AppType>(import.meta.env.VITE_API_URL ?? window.location.origin);
 
 const root = document.getElementById('root')!;
 

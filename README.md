@@ -36,13 +36,18 @@ pnpm clean                          # remove all build output
 pnpm --filter @netxpert/server dev  # run a single workspace
 ```
 
-### Cloudflare Workers
+### Cloudflare deployment
 
 ```bash
 pnpm --filter @netxpert/worker dev         # local Workers runtime on http://localhost:8787
-pnpm --filter @netxpert/worker run deploy  # deploy to Cloudflare (requires wrangler login;
-                                           # "run" is required — bare "deploy" is a pnpm built-in)
+pnpm --filter @netxpert/worker run deploy  # deploy the API to Workers
+pnpm --filter @netxpert/client run deploy  # deploy the client to Pages
+# requires wrangler login; "run" is required — bare "deploy" is a pnpm built-in
 ```
+
+Live demo: client at https://netxpert-client.pages.dev, API at https://netxpert-api.netxpert.workers.dev.
+
+In production the client and API are on different origins, so `apps/client/.env.production` bakes the API URL into the bundle (`VITE_API_URL`, read in `main.tsx`) and the worker grants CORS to the Pages origin and its preview deployments only. In local dev neither applies: the Vite proxy keeps everything same-origin.
 
 The worker serves the identical API, but its counter lives in a **SQLite-backed Durable Object** (`CounterObject`): all requests route to one named instance (`getByName('counter')`), reads and writes are plain SQL via RPC methods, and the value survives isolate restarts and deploys. The Node server uses the in-memory store instead — restart it and the counter resets. Same routes, different storage adapters: that's the `CounterStore` port in `@netxpert/database` doing its job.
 
