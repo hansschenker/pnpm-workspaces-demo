@@ -6,6 +6,7 @@
     { "path": "./packages/jsx" },
     { "path": "./packages/api" },
     { "path": "./apps/server" },
+    { "path": "./apps/worker" },
     { "path": "./apps/client" }
   ]
 }

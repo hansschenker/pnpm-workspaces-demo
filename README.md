@@ -8,6 +8,7 @@ A reference fullstack TypeScript monorepo managed with **pnpm workspaces** — n
 apps/
   client      @netxpert/client    Vite web app — custom JSX runtime + typed RPC client
   server      @netxpert/server    Node bootstrap that serves the api package on :3000
+  worker      @netxpert/worker    Cloudflare Workers deployment of the same api package
 packages/
   api         @netxpert/api       Hono routes as a runtime-agnostic library
   schema      @netxpert/schema    Zod schemas — the contract shared by client and server
@@ -15,7 +16,7 @@ packages/
   jsx         @netxpert/jsx       Custom JSX runtime (TypeScript JSX → real DOM nodes)
 ```
 
-The guiding rule: **`api` is a library, `server` is a deployable.** The api package exports a composed Hono app (`api`) and its type (`AppType`) but never imports a runtime adapter. `apps/server` binds it to Node with `@hono/node-server`; a Cloudflare Worker would be a sibling app exporting `{ fetch: api.fetch }` — same routes, zero changes.
+The guiding rule: **`api` is a library, the apps are deployables.** The api package exports a composed Hono app (`api`) and its type (`AppType`) but never imports a runtime adapter. `apps/server` binds it to Node with `@hono/node-server`; `apps/worker` deploys the very same routes to Cloudflare Workers with `export default api` — zero route changes between runtimes.
 
 ## Getting started
 
@@ -34,6 +35,15 @@ pnpm build                          # build all workspaces in dependency order
 pnpm clean                          # remove all build output
 pnpm --filter @netxpert/server dev  # run a single workspace
 ```
+
+### Cloudflare Workers
+
+```bash
+pnpm --filter @netxpert/worker dev     # local Workers runtime on http://localhost:8787
+pnpm --filter @netxpert/worker deploy  # deploy to Cloudflare (requires wrangler login)
+```
+
+The worker serves the identical API. Caveat: `@netxpert/database` keeps state in module-level memory, which on Workers is per-isolate and ephemeral — fine for the demo, but real state belongs in a Durable Object, KV or D1.
 
 ## What it demonstrates
 

@@ -16,6 +16,8 @@ pnpm clean                          # remove dist/ and tsbuildinfo in every work
 
 pnpm --filter @netxpert/server dev  # run only the API server (http://localhost:3000)
 pnpm --filter @netxpert/client dev  # run only the web client (Vite, http://localhost:5173)
+pnpm --filter @netxpert/worker dev  # run the API on the local Workers runtime (http://localhost:8787)
+pnpm --filter @netxpert/worker deploy  # deploy the worker to Cloudflare
 ```
 
 There are no tests or linting in this repo.
@@ -28,7 +30,8 @@ Workspace layout (`pnpm-workspace.yaml`: `apps/*`, `packages/*`). The core idea:
 - `packages/database` (`@netxpert/database`) — in-memory counter store (get/increment/decrement/reset/set). Depends on schema.
 - `packages/api` (`@netxpert/api`) — Hono route definitions and handlers, exported as a composed `Hono` app object (`api`) plus its type (`AppType`). **Runtime-agnostic: it must never import a runtime adapter** (`@hono/node-server`, Workers types, etc.). Routes are **method-chained** on one expression — required so `AppType` captures the full route tree for RPC typing. Depends on schema and database.
 - `packages/jsx` (`@netxpert/jsx`) — custom JSX runtime creating real DOM nodes (no virtual DOM). Exports `./jsx-runtime` and `./jsx-dev-runtime` so the automatic JSX transform (`jsxImportSource: "@netxpert/jsx"`) compiles JSX into its `jsx`/`jsxDEV` calls. Also exports `render`, `Fragment`, and the `JSX` type namespace (in `src/jsx-runtime.ts`). Prop mapping: `on*` functions → `addEventListener` (lowercase, e.g. `onclick`), `style` objects → `element.style`, everything else → attributes.
-- `apps/server` (`@netxpert/server`) — thin Node bootstrap: `serve({ fetch: api.fetch, port: 3000 })`. ~10 lines; a Cloudflare Workers deployment would be a sibling app exporting `{ fetch: api.fetch }`.
+- `apps/server` (`@netxpert/server`) — thin Node bootstrap: `serve({ fetch: api.fetch, port: 3000 })`. ~10 lines.
+- `apps/worker` (`@netxpert/worker`) — the same api on Cloudflare Workers: `export default api`. Its build runs `wrangler types` to generate `worker-configuration.d.ts` (gitignored, regenerate after changing `wrangler.jsonc`). The in-memory database is per-isolate/ephemeral on Workers — real state would need a Durable Object, KV or D1.
 - `apps/client` (`@netxpert/client`) — Vite app using `@netxpert/jsx` for the UI and Hono's typed RPC client (`hc<AppType>`) instead of hand-written fetch calls, so routes/methods/response shapes are compile-time checked against the api package. State is a module-level variable; updates re-render the whole app via `render(<App />, root)`.
 
 ## Key mechanics

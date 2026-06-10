@@ -1,0 +1,12 @@
+{
+    "$schema": "node_modules/wrangler/config-schema.json",
+    "name": "netxpert-api",
+    "main": "src/index.ts",
+    "compatibility_date": "2026-06-10",
+    "compatibility_flags": ["nodejs_compat"],
+    "minify": true,
+    "observability": {
+        "enabled": true,
+        "head_sampling_rate": 1
+    }
+}

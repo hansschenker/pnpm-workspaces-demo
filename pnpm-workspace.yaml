@@ -9,6 +9,7 @@ catalog:
   tsx: ^4.7.1
   typescript: ^5.9.2
   vite: ^7.1.7
+  wrangler: ^4.99.0
   zod: ^4.1.11
 
 onlyBuiltDependencies:
