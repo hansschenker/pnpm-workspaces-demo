@@ -1,9 +1,15 @@
 import { serve } from '@hono/node-server';
 
-import { api } from '@netxpert/api';
+import { createApi } from '@netxpert/api';
+import { createMemoryStore } from '@netxpert/database';
 
-// The api package is runtime-agnostic; this app binds it to Node.
-// apps/worker binds the same routes to Cloudflare Workers.
+// The api package is runtime-agnostic; this app binds it to Node
+// with a process-lifetime in-memory store.
+// apps/worker binds the same routes to Cloudflare Workers, backed
+// by a Durable Object.
+const store = createMemoryStore();
+const api = createApi(() => store);
+
 serve(
     {
         fetch: api.fetch,

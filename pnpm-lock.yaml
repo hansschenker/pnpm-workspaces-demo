@@ -69,6 +69,9 @@ importers:
       '@netxpert/api':
         specifier: workspace:*
         version: link:../../packages/api
+      '@netxpert/database':
+        specifier: workspace:*
+        version: link:../../packages/database
       hono:
         specifier: 'catalog:'
         version: 4.9.9
@@ -88,6 +91,12 @@ importers:
       '@netxpert/api':
         specifier: workspace:*
         version: link:../../packages/api
+      '@netxpert/database':
+        specifier: workspace:*
+        version: link:../../packages/database
+      '@netxpert/schema':
+        specifier: workspace:*
+        version: link:../../packages/schema
       hono:
         specifier: 'catalog:'
         version: 4.9.9

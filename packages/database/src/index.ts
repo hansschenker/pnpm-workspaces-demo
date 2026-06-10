@@ -1,27 +1,35 @@
 import type { Counter } from '@netxpert/schema';
 
-const counter: Counter = { value: 0 };
-
-export function get(): Counter {
-  return counter;
+// Storage port for the counter. Implementations may be sync (in-memory)
+// or async (Durable Object RPC) — consumers must await the results.
+export interface CounterStore {
+    get(): Counter | Promise<Counter>;
+    increment(): Counter | Promise<Counter>;
+    decrement(): Counter | Promise<Counter>;
+    reset(): Counter | Promise<Counter>;
+    set(value: number): Counter | Promise<Counter>;
 }
 
-export function increment(): Counter {
-  counter.value++;
-  return counter;
-}
+export function createMemoryStore(): CounterStore {
+    const counter: Counter = { value: 0 };
 
-export function decrement(): Counter {
-  counter.value--;
-  return counter;
-}
-
-export function reset(): Counter {
-  counter.value = 0;
-  return counter;
-}
-
-export function set(value: number): Counter {
-  counter.value = value;
-  return counter;
+    return {
+        get: () => counter,
+        increment: () => {
+            counter.value++;
+            return counter;
+        },
+        decrement: () => {
+            counter.value--;
+            return counter;
+        },
+        reset: () => {
+            counter.value = 0;
+            return counter;
+        },
+        set: (value) => {
+            counter.value = value;
+            return counter;
+        }
+    };
 }

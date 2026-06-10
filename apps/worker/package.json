@@ -10,6 +10,8 @@
     },
     "dependencies": {
         "@netxpert/api": "workspace:*",
+        "@netxpert/database": "workspace:*",
+        "@netxpert/schema": "workspace:*",
         "hono": "catalog:"
     },
     "devDependencies": {
