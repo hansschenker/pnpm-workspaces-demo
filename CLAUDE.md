@@ -17,7 +17,7 @@ pnpm clean                          # remove dist/ and tsbuildinfo in every work
 pnpm --filter @netxpert/server dev  # run only the API server (http://localhost:3000)
 pnpm --filter @netxpert/client dev  # run only the web client (Vite, http://localhost:5173)
 pnpm --filter @netxpert/worker dev  # run the API on the local Workers runtime (http://localhost:8787)
-pnpm --filter @netxpert/worker deploy  # deploy the worker to Cloudflare
+pnpm --filter @netxpert/worker run deploy  # deploy the worker to Cloudflare ("run" is required: bare "deploy" is a pnpm built-in)
 ```
 
 There are no tests or linting in this repo.

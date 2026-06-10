@@ -39,8 +39,9 @@ pnpm --filter @netxpert/server dev  # run a single workspace
 ### Cloudflare Workers
 
 ```bash
-pnpm --filter @netxpert/worker dev     # local Workers runtime on http://localhost:8787
-pnpm --filter @netxpert/worker deploy  # deploy to Cloudflare (requires wrangler login)
+pnpm --filter @netxpert/worker dev         # local Workers runtime on http://localhost:8787
+pnpm --filter @netxpert/worker run deploy  # deploy to Cloudflare (requires wrangler login;
+                                           # "run" is required — bare "deploy" is a pnpm built-in)
 ```
 
 The worker serves the identical API, but its counter lives in a **SQLite-backed Durable Object** (`CounterObject`): all requests route to one named instance (`getByName('counter')`), reads and writes are plain SQL via RPC methods, and the value survives isolate restarts and deploys. The Node server uses the in-memory store instead — restart it and the counter resets. Same routes, different storage adapters: that's the `CounterStore` port in `@netxpert/database` doing its job.
