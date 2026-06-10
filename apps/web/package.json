@@ -1,0 +1,19 @@
+{
+    "name": "web",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "echo \"[web] Starting dev server...\" && vite",
+        "build": "echo \"[web] Building application...\" && tsc -b && vite build",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "@jilles/jsx": "workspace:*",
+        "@jilles/schema": "workspace:*"
+    },
+    "devDependencies": {
+        "typescript": "~5.8.3",
+        "vite": "^7.1.7"
+    }
+}

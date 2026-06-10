@@ -3,7 +3,8 @@
   "references": [
     { "path": "./packages/schema" },
     { "path": "./packages/database" },
+    { "path": "./packages/jsx" },
     { "path": "./apps/hono" },
-    { "path": "./apps/react" }
+    { "path": "./apps/web" }
   ]
 }
